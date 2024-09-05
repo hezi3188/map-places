@@ -1,12 +1,28 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import DrawerLayout from './pages/drawerLayout/drawerLayout';
+import ErrorPage from './pages/errorPage/errorPage';
+import MyPlaces from './pages/myPlaces/myPlaces';
+import AddPlace from './pages/addPlace/addPlace';
 
-function App() {
-	const [count, setCount] = useState(0);
-
-	return <h1 className='text-3xl font-bold underline'>Hello world!</h1>;
-}
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <DrawerLayout />,
+		errorElement: <ErrorPage />,
+		children: [
+			{
+				path: '/',
+				element: <MyPlaces />,
+			},
+			{
+				path: 'addPlace',
+				element: <AddPlace />,
+			},
+		],
+	},
+]);
+const App = () => {
+	return <RouterProvider router={router} />;
+};
 
 export default App;
